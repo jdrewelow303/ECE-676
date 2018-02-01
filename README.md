@@ -1,1 +1,1 @@
-"# ECE-676" 
+ECE 676 Advanced Embedded Systems term project
