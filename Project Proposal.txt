@@ -1,0 +1,52 @@
+﻿Sorting and Quality Control Automation Using Computer Vision
+
+
+Introduction
+	Sorting and quality control are two very important areas in modern industry. Automating these processes can increase a company’s profits by reducing labor costs
+and risk of product recall due to human error in inspection. For my project, I plan to automate the process of sorting M&M’s by color, and rejecting any broken M&M’s 
+or non-M&M objects. To do this, there will be five major systems required: computer vision, actuation, sensing communications, and a GUI. 
+
+Computer Vision
+	For the computer vision system, a webcam will be mounted above a small conveyor belt to see the objects as they pass underneath. Using the SimpleCV library for 
+Python, the objects passing under the camera will be judged based on color, size, and shape. The first criteria to check will be shape, since the object can 
+automatically be rejected without checking color or size if the shape is not a circle. Next, the size will be checked to determine that the object is both a circle, and
+the correct size of an M&M. Finally, the color will be checked to make sure that the object is an M&M and then save that color in a list for depositing the M&M into the
+correct container once it gets to the end of the conveyor belt. Depending on the precision of the camera, some values may need some thresholding to allow a small range
+of acceptable values. 
+
+
+Actuation
+	The actuation system will consist of two stepper motors, one LED, and a speaker. The stepper motors will be used to drive the conveyor belt and position the 
+chute, respectively. A stepper motor is ideal for the conveyor driver since the speed can be set precisely and the time it takes an object to travel from beneath the 
+camera to the chute can be easily calculated. Precision is also the main reason for choosing a stepper motor to control the chute. The LED and speaker will be used in 
+conjunction as both a visual and auditory warning if the system experiences a fault, so fault can be made obvious and be fixed promptly. Depending on time limitations, 
+possible faults may include a set number of rejected objects passing beneath the camera in a row, a motor stall, or a clogged conveyor belt.
+
+
+Sensing
+	Although the sorting of the objects will be completely handled by the camera, other sensors will be necessary to detect potential faults in the machine and 
+reduce losses caused by such faults. Two of the most probable faults that could occur are a stalled motor, or blockage on the conveyor belt. Both of these faults could
+lead to significant downtime for the machine as a stalled motor could become damaged and need to be replaced, and a clogged conveyor belt could lead to incorrect 
+sorting or object rejection. To check for a stalled motor, a current sensor can be used to monitor for spikes in current to the motor. If a prolonged spike is detected,
+the machine will power off and call attention to the fault through the LED and speaker. The GUI will also display what caused the fault for easier repair. To determine
+if the conveyor belt has become clogged, a line-break sensor can be made with a laser and a photoresistor to confirm that objects are going down the chute at expected 
+intervals. 
+
+
+Communications
+	Communications will be needed between the computer performing the computer vision processing and the microcontroller controlling the actuations of the machine. 
+Communications will be done through UART with a Bluetooth module connected to the microcontroller. The computer will send information to the microcontroller to control 
+the position of the chute or the speed of the conveyor motor, and the microcontroller will send information to the computer in the case of a fault. 
+
+
+Graphical User Interface
+	Finally, a GUI will be created with Python to allow easy interfacing with the machine. The GUI will contain a live feed of the camera view, a start button, a 
+stop button, a total count of items sorted, a total count of items rejected, a speed adjustment option for the conveyor motor, and an error message in the case of a 
+fault. 
+
+
+Conclusion        
+	Automating the process of sorting and checking objects for quality is a very common and important problem in many industries. My project aims to achieve this 
+automation on a small scale by using computer vision to check objects to first determine if they are an M&M and then sorting them by color if so. This project will 
+span multiple areas of embedded systems such as actuation, sensing, and communications. It will also include some aspects such as computer vision and a GUI that will 
+require higher-level programming on a more powerful processor.
